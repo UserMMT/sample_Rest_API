@@ -1,0 +1,211 @@
+We believe good engineering is about using the right tool for the right job, and constantly learning about them.
+
+You can **use any web framework**, but here's some of the technologies our teams are familiar with: Python, Javascript, Ruby, PHP, Go, Java, Elixir.
+
+No need to use database or caching system.  
+
+======>Implementation free but reasonable choice according to the need
+
+======> May not use Db or  cache [just advice]  ===> Using db or caching system is not mandatory  ===> the use case of the API exceed the X_rate limit but we can handle it with http not modified status (caching) or using multiple github session or user session
+
+No OS specified  ===> best stay generic language Python Java PHP ...
+
+
+
+- Develop a REST microservice that list the languages used by the 100 trending public repos on GitHub.
+- For every language, you need to calculate the attributes below 👇:
+    - Number of repos using this language
+    - The list of repos using the language
+
+
+
+REST api (service web) ===> HTTP server
+
+
+Fetching trending repositories simply translates to fetching the most starred repos created in the last 30 days ( from now ). To do that, you'll need to call the following endpoint:
+
+```
+https://api.github.com/search/repositories?q=created:>{date}&sort=stars&order=desc
+```
+
+The JSON data from Github will be paginated (you'll receive around 100 repos per JSON page). You can ignore the subsequent pages since you only need the first 100 repositories.
+
+Req 
+---->  develop a REST microservice that list the languages used by the 100 trending public repos on GitHub.
+----->Fetching trending repositories simply translates to fetching the most starred repos created in the last 30 days ( from now ). To do that, you'll need to call the following endpoint:
+Musundertood
+top 100 repos || top 100 repos created from last 30 days 
+Must we integrate time of creation also
+On_Studing
+
+Unspecified use case 
+We don't know how the api will be use will it pe underload or overload frequently like dashboard app what attribut of repo did it need to use
+
+API rating constraint 
+	For unspecified user you have 10 request/min in search api
+	For a define user you have  30 r/s in search
+API auth way
+1st method deprecated by functional
+curl -i -u "$1:$2" "https://api.github.com/search/repositories?q=created:%3E"$3"&sort=stars&order=desc&page=1&per_page=100"
+Parameters
+$1:Username github
+$2:Password
+$3:current date you  can  use int format or   2020-09-01  or more precision 
+2d Method auth with token 
+
+
+Can a repo have more than one langage .(no as i seen) 
+Can a repo have no langage . Yes (null)
+
+Size of reponse 578.36 Ko
+Request time 2.88s-4.88s	
+
+item struct 
+ {
+      "id": 292790829,
+      "node_id": "MDEwOlJlcG9zaXRvcnkyOTI3OTA4Mjk=",
+      "name": "eleventy-high-performance-blog",
+      "full_name": "google/eleventy-high-performance-blog",
+      "private": false,
+      "owner": {
+        "login": "google",
+        "id": 1342004,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjEzNDIwMDQ=",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/1342004?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/google",
+        "html_url": "https://github.com/google",
+        "followers_url": "https://api.github.com/users/google/followers",
+        "following_url": "https://api.github.com/users/google/following{/other_user}",
+        "gists_url": "https://api.github.com/users/google/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/google/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/google/subscriptions",
+        "organizations_url": "https://api.github.com/users/google/orgs",
+        "repos_url": "https://api.github.com/users/google/repos",
+        "events_url": "https://api.github.com/users/google/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/google/received_events",
+        "type": "Organization",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/google/eleventy-high-performance-blog",
+      "description": "A high performance blog template for the 11ty static site generator.",
+      "fork": false,
+      "url": "https://api.github.com/repos/google/eleventy-high-performance-blog",
+      "forks_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/forks",
+      "keys_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/teams",
+      "hooks_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/hooks",
+      "issue_events_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/events",
+      "assignees_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/tags",
+      "blobs_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/languages",
+      "stargazers_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/stargazers",
+      "contributors_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/contributors",
+      "subscribers_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/subscribers",
+      "subscription_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/subscription",
+      "commits_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/merges",
+      "archive_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/downloads",
+      "issues_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/labels{/name}",
+      "releases_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/google/eleventy-high-performance-blog/deployments",
+      "created_at": "2020-09-04T08:16:00Z",
+      "updated_at": "2020-09-20T10:21:38Z",
+      "pushed_at": "2020-09-19T15:01:10Z",
+      "git_url": "git://github.com/google/eleventy-high-performance-blog.git",
+      "ssh_url": "git@github.com:google/eleventy-high-performance-blog.git",
+      "clone_url": "https://github.com/google/eleventy-high-performance-blog.git",
+      "svn_url": "https://github.com/google/eleventy-high-performance-blog",
+      "homepage": "https://www.industrialempathy.com/posts/eleventy-high-performance-blog/",
+      "size": 24104,
+      "stargazers_count": 2335,
+      "watchers_count": 2335,
+      "language": "JavaScript",
+      "has_issues": true,
+      "has_projects": false,
+      "has_downloads": true,
+      "has_wiki": false,
+      "has_pages": false,
+      "forks_count": 110,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 7,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "forks": 110,
+      "open_issues": 7,
+      "watchers": 2335,
+      "default_branch": "main",
+      "score": 1.0
+    }
+	
+	
+	
+	
+	Is repo number in the query usefull (rate number): i think yes
+	
+	Output format order by frequency  : no need
+	struct res [{"language":"xyz",
+	"number_repo_in_top_100":5,
+	"list_of_repo":[]
+	},{...},{...}]
+	
+	query with  a  specific  language C C++ Python
+	
+	For general request enable multithreading in  a parsing process
+	in the 100 items looping
+	using frequency to get nb occur is like mading n[nb_langage] time the 100 elements on a loop so algorithmly it's a loose of time
+	complete all attribute in juste one parcours would be better 
+	spliting loop by  n thread would be more fast
+	
+	--find the WADL (Web Application Description language) for java implementation
+	 WADL is not as usefull as WSDL we can build efficiently client from WADL
+	   https://api.github.com/?wadl
+	--Use a third party api for using github API
+	good but the API won't be autonomous
+	  https://developer.github.com/v3/libraries/
+	--Simply use a HTTP client for the request like curl
+	Yes
+	https://api.github.com/search/repositories?q=created:<{date}&sort=stars&order=desc&page=1&per_page=100
+	Other observation
+	* When we add also time to the search we got format iso 8601 
+	2020-08-23T16:38:29+02:00
+	you'll receive less result
+	"total_count": 26,
+  "incomplete_results": false,
+  "items": [
+  
+  * but with this format 2020-08-23 
+  "total_count": 2302149,
+  "incomplete_results": false,
+  "items": [
+  
+  
+  
+  
+
+  

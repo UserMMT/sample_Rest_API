@@ -1,0 +1,17 @@
+Class service
+lang{
+string name;
+string ordre_tendance;
+int nb_element;
+repositories items[];
+}
+
+The only Method is GET
+language[] language();  //Return all found lang
+
+
+language language(path_param string name); //Return query lang struct;
+
+//We can also improve to fix rate_limit problem split the time off request into inchange value Period considering we have
+10 R/60s ==>1 request/6s ==> validity duration and multiple clients handling
+but those optimisation can't be implemented on php
