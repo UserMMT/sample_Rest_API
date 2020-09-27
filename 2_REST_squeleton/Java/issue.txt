@@ -1,0 +1,23 @@
+None well tested
+HTTP Status 500 - Internal Server Error
+
+type Exception report
+
+messageInternal Server Error
+
+descriptionThe server encountered an internal error that prevented it from fulfilling this request.
+
+exception
+
+javax.servlet.ServletException: org.glassfish.jersey.server.ContainerException: java.lang.NoClassDefFoundError: sun/security/ssl/HandshakeStateManager
+
+root cause
+
+org.glassfish.jersey.server.ContainerException: java.lang.NoClassDefFoundError: sun/security/ssl/HandshakeStateManager
+
+root cause
+
+java.lang.NoClassDefFoundError: sun/security/ssl/HandshakeStateManager
+
+note The full stack traces of the exception and its root causes are available in the GlassFish Server Open Source Edition 5.1.0 logs.
+GlassFish Server Open Source Edition 5.1.0 

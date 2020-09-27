@@ -1,0 +1,34 @@
+# backend-coding-challenge
+
+Le défi de codage est facultatif si vous avez déjà du code sur Github dont vous êtes fier et que vous pouvez partager avec nous. Si vous le faites, passez au bas de ce document.
+
+Si vous n'avez pas encore de code à partager, vous pouvez travailler sur notre défi de codage décrit ci-dessous 👇.
+
+Veuillez organiser, concevoir et documenter votre code comme s'il était en production, puis envoyez-nous un lien vers le référentiel hébergé (par exemple Github, Bitbucket, Gitlab ...).
+
+## Spécifications techniques
+
+Nous pensons qu'une bonne ingénierie consiste à utiliser le bon outil pour le bon travail et à en apprendre constamment à leur sujet.
+
+Vous pouvez ** utiliser n'importe quel framework web **, mais voici quelques-unes des technologies que nos équipes connaissent: Python, Javascript, Ruby, PHP, Go, Java, Elixir.
+
+Pas besoin d'utiliser une base de données ou un système de mise en cache.
+
+## Spécifications fonctionnelles
+
+- Développer un microservice REST qui répertorie les langues utilisées par les 100 référentiels publics tendance sur GitHub.
+- Pour chaque langue, vous devez calculer les attributs ci-dessous 👇:
+    - Nombre de dépôts utilisant cette langue
+    - La liste des dépôts utilisant la langue
+
+## Comment obtenir des repos tendances depuis Github
+
+La récupération des référentiels tendance se traduit simplement par la récupération des dépôts les plus suivis créés au cours des 30 derniers jours (à partir de maintenant). Pour ce faire, vous devrez appeler le point de terminaison suivant:
+
+''
+https://api.github.com/search/repositories?q=created:>{date}&sort=stars&order=desc
+''
+
+Les données JSON de Github seront paginées (vous recevrez environ 100 dépôts par page JSON). Vous pouvez ignorer les pages suivantes car vous n'avez besoin que des 100 premiers référentiels.
+
+Si vous souhaitez en savoir plus sur l'API Github, vous pouvez cliquer sur le [lien] suivant (https://developer.github.com/v3/).
